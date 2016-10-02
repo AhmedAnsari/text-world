@@ -1,0 +1,110 @@
+#
+# Evennia batchfile - text_sims
+#
+# Griatch 2011, 2015
+# Text-sims world 1
+#
+# To load this file, place yourself in Limbo (room #2) and load the
+# file as user #1 with
+#
+#     @batchcommand text_sims.build
+#
+# If you give the /interactive switch you can step through the
+# build process command for command.
+#
+# The area we are building looks like this:
+#
+#      ------------          ----------    
+#      |hall      |          |park    |    
+#Limbo-+   01     +----------+  02    |
+#      |          |          |        |  
+#      -----+------          ----+----- 
+#           |                    |       
+#      -----+------          ----+-----
+#      |bedroom   |          |kitchen |   
+#      |   04     +----------+  03    |   
+#      |          |          |        |
+#      ------------          ----------  
+#
+#
+@tel #2
+#
+########### Hall ##############
+@dig Hall;tut#01
+ : text_sims.rooms.TutorialRoom
+#
+@open start = tut#01
+#
+start
+#
+#
+@detail desc1 = This room has windows, chairs and TV.
+#
+@detail desc2 = You have entered the hall. You can watch TV here.
+#
+@detail desc3 = This room has two sofas, chairs and a chandelier.
+#
+@create/drop aquarium:text_sims.objects.Watchable
+#
+@desc aquarium = A big water tank where different fishes exist.
+#
+########### park ##############
+@dig/teleport Park;tut#02
+ : text_sims.rooms.TutorialRoom
+ = east;go east, west;go west
+#
+#
+#
+@detail desc1 = This space has herbs, shrubs and trees.
+#
+@detail desc2 = You have arrived at the park. You can refresh here 
+#
+@detail desc3 = This area has plants, grass and rabbits.
+#
+@create/drop treadMill:text_sims.objects.Exercisable
+#
+@desc treadMill = A heavy instrument on which we can run to become fit.
+#
+########### kitchen ##############
+@dig/teleport Kitchen;tut#03
+ : text_sims.rooms.TutorialRoom
+ = south;go south, north;go north
+#
+#
+@detail desc1 = This room has a fridge, oven, and cutlery.
+#
+@detail desc2 = You have arrived in the kitchen. You can find food and drinks here.
+#
+@detail desc3 = This living area has burger, buttermilk, and desserts. 
+#
+@create/drop pizza:text_sims.objects.Consumable
+#
+@desc pizza = A flatbread topped with cheese.
+#
+########### bedroom ##############
+@dig/teleport Bedroom;tut#04
+ : text_sims.rooms.TutorialRoom
+ = west;go west, east;go east
+#
+@open north;go north = tut#01
+#
+@detail desc1 = This area has a bed, desk and an attached bathroom.
+#
+@detail desc2 = You have arrived in the bedroom. You can relax here.
+#
+@detail desc3 = You see a wooden cot and a mattress on top of it.
+#
+@create/drop couch:text_sims.objects.Sleepable
+#
+@desc couch = A piece of furniture for sitting.
+#
+#
+#
+#
+# Go back to hall and create the last paths, before going back to limbo
+north
+#
+@open south;go south = tut#04
+#
+#go back to limbo
+@tel #2
